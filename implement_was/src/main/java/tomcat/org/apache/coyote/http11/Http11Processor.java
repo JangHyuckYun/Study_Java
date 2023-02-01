@@ -31,14 +31,6 @@ public class Http11Processor implements Runnable, Processor {
     }
 
     public Http11Processor(Socket connection, Map<String, Controller> controllers) {
-        try {
-            connection.setKeepAlive(true);
-            connection.setTcpNoDelay(true);
-            connection.setReuseAddress(true);
-            connection.setOOBInline(true);
-        } catch (SocketException e) {
-            throw new RuntimeException(e);
-        }
         this.connection = connection;
         this.controllers = controllers;
     }

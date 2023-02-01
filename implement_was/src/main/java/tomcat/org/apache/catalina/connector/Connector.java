@@ -29,7 +29,7 @@ public class Connector implements Runnable {
     public Connector(int port, int maxThreadCount, Map<String, Controller> controllers) {
         try {
             this.controllers = controllers;
-            serverSocket = new ServerSocket(8200);
+            serverSocket = new ServerSocket(DEFAULT_PORT);
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
@@ -63,9 +63,6 @@ public class Connector implements Runnable {
 
     public void connect() {
         try {
-//            Socket socket = serverSocket.accept();
-//            serverSocket.setSoTimeout(5000);
-//            serverSocket.setSoTimeout(5000);
             process(serverSocket.accept());
         } catch (IOException e) {
             throw new RuntimeException(e);
