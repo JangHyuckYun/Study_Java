@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.net.*;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Connector implements Runnable {
 
@@ -14,6 +17,8 @@ public class Connector implements Runnable {
     private static final int DEFAULT_MAX_THREAD_COUNT = 100;
 
     private Map<String, Controller> controllers = null;
+    private ExecutorService executorService = null;
+    private CountDownLatch countDownLatch = null;
 
     private ServerSocket serverSocket;
     private boolean stopped = false;
@@ -41,6 +46,9 @@ public class Connector implements Runnable {
         thread.start();
 
         stopped = false;
+        this.executorService = Executors.newFixedThreadPool(5);
+        this.countDownLatch = new CountDownLatch(5);
+
     }
 
     public void stop() {
@@ -72,7 +80,8 @@ public class Connector implements Runnable {
     public void process(Socket socket) throws IOException {
         if (serverSocket == null) return;
 
-        Runnable runnable = new Http11Processor(socket, controllers);
-        (new Thread(runnable)).start();
+        Runnable runnable = new Http11Processor(socket, controllers, countDownLatch);
+        this.executorService.submit(runnable);
+//        (new Thread(runnable)).start();
     }
 }
