@@ -19,7 +19,6 @@ public class HelloController extends AbstractController {
 
     @Override
     public HttpResponse doGet(HttpRequest request, HttpResponse response) {
-        System.out.println("Hello Controller!!");
         String responseBody = "";
         try {
             responseBody = FileUtils.fileToString("hello.html");
@@ -33,7 +32,7 @@ public class HelloController extends AbstractController {
     @Override
     public HttpResponse doPost(HttpRequest request, HttpResponse response) {
 
-        response.setResponse(HttpStatus.OK, "{'test':'aaa'}", ContentType.JSON);
+        response.setResponse(HttpStatus.OK, "{\"test\":\"aaa\"}", ContentType.JSON);
         return response;
 
     }
