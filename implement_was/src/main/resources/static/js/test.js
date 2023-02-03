@@ -3,13 +3,12 @@ function test() {
 }
 
 async function load() {
-	const data = await fetch("/hello", { method:"POST" }).then(d => d);
+	const data = await fetch("/hello", { method:"POST" }).then(d => d.text());
 	
 	console.log('data', data)
 }
 
 window.onload = function () {
-	console.log('hello test 2222');
 	test();
 	
 	load();
