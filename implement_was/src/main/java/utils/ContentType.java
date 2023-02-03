@@ -13,10 +13,10 @@ public enum ContentType {
     NULL("null"),
     XML("application/xml");
 
-    private static String contentType;
+    private String contentType;
 
-    private ContentType(String contentType){
-        contentType = contentType;
+    private ContentType(String type){
+        this.contentType = type;
     }
 
     public String getContentType() {
@@ -24,6 +24,7 @@ public enum ContentType {
     }
 
     public static ContentType getContentType(String url) {
+        System.out.println("String url: "+url);
         String[] urlSplit = url.split("\\.");
         String type = urlSplit[urlSplit.length - 1];
 
