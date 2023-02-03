@@ -14,12 +14,14 @@ import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
 public class Http11Processor implements Runnable, Processor {
 
     Socket connection;
 
     private Map<String, Controller> controllers = null;
+    private CountDownLatch countDownLatch = null;
 
     @Override
     public void run() {
@@ -35,6 +37,12 @@ public class Http11Processor implements Runnable, Processor {
         this.controllers = controllers;
     }
 
+    public Http11Processor(Socket connection, Map<String, Controller> controllers, CountDownLatch countDownLatch) {
+        this.connection = connection;
+        this.controllers = controllers;
+        this.countDownLatch = countDownLatch;
+    }
+
     @Override
     public void process(Socket connection) throws IOException {
         InputStreamReader isr = null;
@@ -45,6 +53,7 @@ public class Http11Processor implements Runnable, Processor {
         try {
             isr = new InputStreamReader(connection.getInputStream(), "utf8");
             br = new BufferedReader(isr);
+
 
             List<String> lines = new ArrayList<>();
             String line;
@@ -66,6 +75,7 @@ public class Http11Processor implements Runnable, Processor {
 
             if(httpResponse != null) {
                 httpResponse.sendResponse();
+                countDownLatch.countDown();
             }
 
         } catch (IOException e) {
