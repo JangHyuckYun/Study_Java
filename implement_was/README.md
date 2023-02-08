@@ -9,4 +9,4 @@ spring을 공부하기에 앞서, 사용자에게 웹 페이지를 보여주는 
 
 
 ## 프로젝트 설명
-[JHBlog](https://janghyuck.netlify.app/blog/development/Programming-language/Java/Study/CustomTomcat/)
+<a href="https://janghyuck.netlify.app/blog/development/Programming-language/Java/Study/CustomTomcat/" target="_blank">JHBlog/CustomTomcat</a>
