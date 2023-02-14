@@ -7,9 +7,6 @@ spring 관련 강의를 들을까 고민을 했지만, 막연하게 따라하고
 spring을 공부하기에 앞서, 사용자에게 웹 페이지를 보여주는 과정을
 먼저 공부해보고 싶어져서, WAS ( Web Application Server )를 custom으로 만들게 되었다.
 
+
 ## 프로젝트 설명
 <a href="https://janghyuck.netlify.app/blog/development/Programming-language/Java/Study/CustomTomcat/" target="_blank">JHBlog/CustomTomcat</a>
-
-## 프로젝트 후기
-톰캣의 대략적인 흐름에 대해 파악할 수 있게 되었다.
-
