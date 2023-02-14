@@ -35,8 +35,9 @@ public class FileUtils {
         return fileToString(new File(url.getPath()));
     }
     public static String fileToString(File file) throws IOException {
-        BufferedReader bf = null;
         if(!file.isFile()) throw new FileNotFoundException("Can not find File");
+
+        BufferedReader bf = null;
         bf = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"));
         String line = "";
         StringBuffer sbf = new StringBuffer();

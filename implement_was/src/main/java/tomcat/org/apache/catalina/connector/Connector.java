@@ -82,6 +82,6 @@ public class Connector implements Runnable {
 
         Runnable runnable = new Http11Processor(socket, controllers, countDownLatch);
         this.executorService.submit(runnable);
-//        (new Thread(runnable)).start();
+        // 다음 코드...
     }
 }

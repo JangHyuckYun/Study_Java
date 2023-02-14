@@ -59,10 +59,6 @@ public class HttpResponse {
     public void sendResponse() throws IOException {
         try {
             String resultTxt = this.status >= 200 && this.status < 300 ? "OK" : "Not Found";
-            System.out.println("Send Response...");
-            System.out.println("HTTP/1.1 " + this.status +" "+ resultTxt);
-            System.out.println("Content-Type: "+this.headers.get("Content-Type") + ";charset=UTF-8");
-            System.out.println("Content-Length: "+this.responseBody.toString().length());
 
             byte[] body = this.responseBody.getBytes(StandardCharsets.UTF_8);
             this.dos.writeBytes("HTTP/1.1 " + this.status +" "+ resultTxt +" \r\n");

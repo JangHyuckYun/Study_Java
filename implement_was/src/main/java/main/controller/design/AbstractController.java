@@ -40,7 +40,7 @@ public abstract class AbstractController implements Controller {
 
     @Override
     public HttpResponse service(HttpRequest request, HttpResponse response) throws Exception {
-        System.out.println("Abstract service... / method: "+request.getMethod());
+        System.out.println("Abstract service... "+ request.getUrl() +" method: "+request.getMethod());
         switch (HttpMethod.compare(request.getMethod())) {
             case GET:
                 return doGet(request, response);

@@ -12,6 +12,7 @@ import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
@@ -46,7 +47,6 @@ public class Http11Processor implements Runnable, Processor {
     @Override
     public void process(Socket connection) throws IOException {
         InputStreamReader isr = null;
-        OutputStream os = null;
         BufferedReader br = null;
         HttpRequest httpRequest = new HttpRequest();
         HttpResponse httpResponse = null;
@@ -60,9 +60,9 @@ public class Http11Processor implements Runnable, Processor {
 
             while ((line = br.readLine()) != null) {
                 if (line.equals("")) {
+                    System.out.println(lines.toString());
                     httpRequest.setHttpRequest(lines);
-                    String contentLength = "Content-Length";
-                    if (httpRequest.getHeaders().containsKey(contentLength)) {
+                    if (httpRequest.getHeaders().containsKey("Content-Length")) {
                         httpRequest.initialParams(br);
                     }
                     httpResponse = createResponse(httpRequest, connection.getOutputStream());
@@ -81,9 +81,6 @@ public class Http11Processor implements Runnable, Processor {
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
-            if (os != null) {
-                os.close();
-            }
             if (br != null) {
                 br.close();
             }

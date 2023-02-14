@@ -24,7 +24,6 @@ public enum ContentType {
     }
 
     public static ContentType getContentType(String url) {
-        System.out.println("String url: "+url);
         String[] urlSplit = url.split("\\.");
         String type = urlSplit[urlSplit.length - 1];
 

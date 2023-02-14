@@ -31,7 +31,6 @@ public class HelloController extends AbstractController {
 
     @Override
     public HttpResponse doPost(HttpRequest request, HttpResponse response) {
-
         response.setResponse(HttpStatus.OK, "{\"test\":\"aaa\"}", ContentType.JSON);
         return response;
 
